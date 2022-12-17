@@ -24,12 +24,10 @@
         "strictPropertyInitialization": false,
     },
     "include": [
-        "src/**/*",
+        "src/**/*"
     ],
     "exclude": [
         "node_modules",
-        "dist",
-        "src/demo",
         "**/__tests__/*"
     ]
 }

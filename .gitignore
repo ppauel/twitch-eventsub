@@ -105,6 +105,6 @@ lib/
 .tern-port
 
 # Development
-demo/
 __tests__/
 .DS_Store
+demo/

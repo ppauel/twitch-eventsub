@@ -1,6 +1,6 @@
 {
     "name": "@ppauel/twitch-eventsub",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Twitch EventSub Listener",
     "main": "./lib/index.js",
     "types": "lib/index.d.ts",
@@ -9,8 +9,8 @@
         "build": "tsc",
         "prepare": "npm run build",
         "prepublishOnly": "npm test",
-        "version": "npm run format && git add -A src",
-        "postversion" : "git push && git push --tags"
+        "version": "npm run format && git add .",
+        "postversion": "git push && git push --tags"
     },
     "repository": {
         "type": "git",
@@ -20,7 +20,11 @@
         "url": "https://github.com/ppauel/twitch-eventsub/issues"
     },
     "homepage": "https://github.com/ppauel/twitch-eventsub#readme",
-    "keywords": ["twitch", "eventsub", "client"],
+    "keywords": [
+        "twitch",
+        "eventsub",
+        "client"
+    ],
     "author": "pauel",
     "dependencies": {
         "@discordjs/collection": "^1.3.0",
