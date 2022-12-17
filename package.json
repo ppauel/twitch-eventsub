@@ -1,6 +1,6 @@
 {
     "name": "@ppauel/twitch-eventsub",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "A simple WebSocket based Twitch EventSub handler",
     "main": "./lib/index.js",
     "types": "lib/index.d.ts",
@@ -9,7 +9,7 @@
         "build": "tsc",
         "prepare": "npm run build",
         "prepublishOnly": "npm test",
-        "version": "npm run format && git add .",
+        "version": "git add .",
         "postversion": "git push && git push --tags"
     },
     "repository": {
