@@ -1,5 +1,5 @@
 {
-    "name": "twitch-eventsub",
+    "name": "@ppauel/twitch-eventsub",
     "version": "1.0.0",
     "description": "Twitch EventSub Listener",
     "main": "./lib/index.js",
