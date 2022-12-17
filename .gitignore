@@ -107,3 +107,4 @@ lib/
 # Development
 demo/
 __tests__/
+.DS_Store
