@@ -7,7 +7,7 @@
         "typeRoots": [
             "node_modules/@types"
         ],
-        "outDir": "./dist/",
+        "outDir": "./lib",
         "allowSyntheticDefaultImports": true,
         "declaration": true,
         "declarationMap": true,
@@ -24,10 +24,12 @@
         "strictPropertyInitialization": false,
     },
     "include": [
-        "src/**/*"
+        "src/**/*",
     ],
     "exclude": [
         "node_modules",
-        "dist"
+        "dist",
+        "src/demo",
+        "**/__tests__/*"
     ]
 }
