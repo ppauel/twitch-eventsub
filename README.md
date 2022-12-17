@@ -1,4 +1,14 @@
 
+# Twitch EventSub
+
+A simple WebSocket based Twitch EventSub handler
+## Installation
+
+Install Twitch EventSub with npm
+
+```bash
+  npm install @ppauel/twitch-eventsub
+```
 ## Usage
 
 ### Example
