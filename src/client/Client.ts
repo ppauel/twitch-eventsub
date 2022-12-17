@@ -4,7 +4,13 @@ import EventEmitter from "events";
 import { WebSocketPaths } from "../util/Paths";
 import { Subscription } from "../structures/Subscription";
 import { MessageTypes } from "../util/Enums";
-import { Event } from "../util/Data";
+// import { Event } from "../util/Data";
+
+export declare interface Client {
+    on<K extends keyof ClientEvents>(event: K, listener: (...args: ClientEvents[K]) => void): this;
+    once<K extends keyof ClientEvents>(event: K, listener: (...args: ClientEvents[K]) => void): this;
+    emit<K extends keyof ClientEvents>(event: K, ...args: ClientEvents[K]): boolean;
+}
 
 export class Client extends EventEmitter {
     public userToken: ClientOptions['userToken'];
@@ -33,8 +39,12 @@ export class Client extends EventEmitter {
                         const eventName = message.payload.subscription.type;
                         const subscription = this.subscriptions.get(formatKey(eventName, broadcasterId));
 
-                        if (subscription) this.emit('subscription', message.payload.event, eventName, broadcasterId);
+                        if (subscription) this.emit('event', message.payload.event, eventName, broadcasterId);
                         break;
+
+                    case MessageTypes.SessionKeepAlive:
+                        break;
+
                     default:
                         break;
                 }
@@ -61,9 +71,50 @@ interface ClientOptions {
     clientId: string;
 }
 
-interface ClientEvents {
+export interface ClientEvents {
     ready: [client: Client];
-    subscription: [event: Event, eventName: string, broadcasterId: string];
+    event: [event: any, eventName: string, broadcasterId: string]; // ToDo: Event interface
+}
+
+// https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types
+export enum SubscriptionEvents {
+    ChannelBan = "channel.ban",
+    ChannelUnban = "channel.unban",
+    ChannelCheer = "channel.cheer",
+    ChannelRaid = "channel.raid",
+    ChannelFollow = "channel.follow",
+    ChannelUpdate = "channel.update",
+    ChannelSubscribe = "channel.subscribe",
+    ChannelSubscriptionEnd = "channel.subscription.end",
+    ChannelSubscriptionGift = "channel.subscription.gift",
+    ChannelSubscriptionMessage = "channel.subscription.message",
+    ChannelModeratorAdd = "channel.moderator.add",
+    ChannelModeratorRemove = "channel.moderator.remove",
+    ChannelPointsCustomRewardAdd = "channel.channel_points_custom_reward.add",
+    ChannelPointsCustomRewardUpdate = "channel.channel_points_custom_reward.update",
+    ChannelPointsCustomRewardRemove = "channel.channel_points_custom_reward.remove",
+    ChannelPointsCustomRewardRedemptionAdd = "channel.channel_points_custom_reward_redemption.add",
+    ChannelPointsCustomRewardRedemptionUpdate = "channel.channel_points_custom_reward_redemption.update",
+    ChannelPollBegin = "channel.poll.begin",
+    ChannelPollProgress = "channel.poll.progress",
+    ChannelPollEnd = "channel.poll.end",
+    ChannelPredictionBegin = "channel.prediction.begin",
+    ChannelPredictionProgress = "channel.prediction.progress",
+    ChannelPredictionLock = "channel.prediction.lock",
+    ChannelPredictionEnd = "channel.prediction.end",
+    DropEntitlementGrant = "drop.entitlement.grant",
+    ExtensionBitsTransactionCreate = "extension.bits_transaction.create",
+    GoalBegin = "channel.goal.begin",
+    GoalProgress = "channel.goal.progress",
+    GoalEnd = "channel.goal.end",
+    HypeTrainBegin = "channel.hype_train.begin",
+    HypeTrainProgress = "channel.hype_train.progress",
+    HypeTrainEnd = "channel.hype_train.end",
+    StreamOnline = "stream.online",
+    StreamOffline = "stream.offline",
+    UserAuthorizationGrant = "user.authorization.grant",
+    UserAuthorizationRevoke = "user.authorization.revoke",
+    UserUpdate = "user.update"
 }
 
 export function formatKey(eventName: string, broadcasterId: string) {

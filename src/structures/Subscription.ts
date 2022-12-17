@@ -1,7 +1,7 @@
 import { SubscriptionData } from "../util/Data";
 import { request } from 'https';
 import { RequestHosts, RequestPaths } from "../util/Paths";
-import { EventSubs } from "../util/Enums";
+import { SubscriptionEvents } from "../client/Client";
 
 export class Subscription {
     public data: SubscriptionData;
@@ -56,7 +56,7 @@ export class Subscription {
 
 interface ConstructorOptions {
     broadcasterId: string;
-    event: EventSubs;
+    event: SubscriptionEvents;
 }
 
 interface SubscriptionOptions {
