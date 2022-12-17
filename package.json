@@ -1,7 +1,7 @@
 {
     "name": "@ppauel/twitch-eventsub",
     "version": "1.0.1",
-    "description": "Twitch EventSub Listener",
+    "description": "A simple WebSocket based Twitch EventSub handler",
     "main": "./lib/index.js",
     "types": "lib/index.d.ts",
     "scripts": {
